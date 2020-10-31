@@ -1,0 +1,113 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+$(function() {
+	$('div.cate_container').click(function() {
+		var cateno = $(this).attr('cateno');
+		$.ajax({
+			type : 'post',
+			url : 'topfive.do',
+			data : {'cateno' : cateno},
+			success : function(res) {
+				$(".pricing-plan").html(res);		
+				
+			}		
+		});
+	});
+	
+	
+});
+</script>
+<style type="text/css">
+.col-five > div.thead, #top5{
+	height: 200px;
+}
+
+div.thead > img {
+	height: 100%;
+}
+
+div.box-contact > img.cate_img {
+	border-radius: 0%;
+	top: 7px;
+}
+
+.small-spacing div.cate_container {
+	padding: 60px 20px 60px 20px;
+	margin-top: 10px;
+}
+div.td.option{
+	overflow: auto;
+	height: 200px;
+}
+
+.option ul{
+	list-style: none;
+	text-align: left;
+	vertical-align: center;
+}
+
+.pricing-table .pname {
+	height: 120px;
+}
+
+.pname ul{
+	list-style: none;
+	vertical-align: center;
+	margin:0px; padding:0px;
+}
+
+.col-five:nth-child(2) > .thead{
+ background-color: #0652DD;
+}
+
+.col-five:nth-child(3) > .thead{
+ background-color: #2980b9;
+}
+
+.col-five:nth-child(4) > .thead{
+ background-color: #2980b9;
+}
+
+.col-five:nth-child(5) > .thead{
+ background-color: #2980b9;
+}
+
+.col-five:nth-child(6) > .thead{
+ background-color: #2980b9;
+}
+
+.box-contact > .reply_name , .box-contact > .text-muted > .reply_cont {
+	color: black;	
+}
+
+.rpl_list > .reply_box{
+    margin-top: 0px;
+}
+</style>
+</head>
+<body>
+	<div class="row small-spacing">
+		<c:forEach var="vo" items="${cateList}">
+			<div class="col-lg-2 col-md-6">
+				<div class="box-contact cate_container" cateno="${vo.cateno}" style="cursor:pointer">
+					<img src="${vo.cateimg}" class="avatar cate_img">
+				</div>
+				<!-- /.box-contact -->
+			</div>
+		</c:forEach>
+	</div>
+	
+	<div class="pricing-plan">
+			
+	</div>
+
+
+</body>
+</html>
